@@ -112,8 +112,8 @@ public final class DatabaseService extends AbstractService {
 		return future;
 	}
 
-	public <T> T execute(Transaction<T> transaction) throws ExecutionException, InterruptedException {
-		return executeAsync(transaction).get();
+	public <T> T execute(Transaction<T> transaction) throws ExecutionException {
+		return Uninterruptibles.getUninterruptibly(executeAsync(transaction));
 	}
 
 	public Future<Void> executeVoidAsync(VoidTransaction transaction) {
@@ -123,8 +123,8 @@ public final class DatabaseService extends AbstractService {
 		});
 	}
 
-	public void executeVoid(VoidTransaction transaction) throws ExecutionException, InterruptedException {
-		executeVoidAsync(transaction).get();
+	public void executeVoid(VoidTransaction transaction) throws ExecutionException {
+		Uninterruptibles.getUninterruptibly(executeVoidAsync(transaction));
 	}
 
 	@Override
