@@ -92,6 +92,15 @@ public final class DatabaseService extends AbstractService {
 		this.threads = createThreads(executors);
 	}
 
+	public DatabaseService start() {
+		startAsync().awaitRunning();
+		return this;
+	}
+
+	public void stop() {
+		stopAsync().awaitTerminated();
+	}
+
 	public <T> ListenableFuture<T> executeAsync(Transaction<T> transaction) {
 		SettableFuture<T> future = SettableFuture.create();
 
