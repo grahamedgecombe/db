@@ -32,7 +32,7 @@ public final class DatabaseServiceTest {
 	}
 
 	@Test
-	public void testSuccess() throws ExecutionException, InterruptedException {
+	public void testSuccess() throws ExecutionException {
 		if (service == null) {
 			throw new IllegalStateException();
 		}
@@ -53,7 +53,7 @@ public final class DatabaseServiceTest {
 	}
 
 	@Test(expected = ExecutionException.class)
-	public void testFailure() throws ExecutionException, InterruptedException {
+	public void testFailure() throws ExecutionException {
 		if (service == null) {
 			throw new IllegalStateException();
 		}
