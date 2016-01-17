@@ -2,7 +2,6 @@ package com.grahamedgecombe.db;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import javax.sql.DataSource;
 
@@ -116,7 +115,7 @@ public final class DatabaseService extends AbstractService {
 		return Uninterruptibles.getUninterruptibly(executeAsync(transaction));
 	}
 
-	public Future<Void> executeVoidAsync(VoidTransaction transaction) {
+	public ListenableFuture<Void> executeVoidAsync(VoidTransaction transaction) {
 		return executeAsync(connection -> {
 			transaction.execute(connection);
 			return null;
