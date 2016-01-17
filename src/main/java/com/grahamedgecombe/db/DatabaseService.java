@@ -13,7 +13,7 @@ import com.google.common.util.concurrent.Uninterruptibles;
 import org.checkerframework.checker.lock.qual.GuardedBy;
 
 public final class DatabaseService extends AbstractService {
-	private static final BackoffStrategy DEFAULT_BACKOFF_STRATEGY = new BinaryExponentialBackoffStrategy(8, 100);
+	private static final BackoffStrategy DEFAULT_BACKOFF_STRATEGY = new BinaryExponentialBackoffStrategy(8, 10);
 	private static final DeadlockDetector DEFAULT_DEADLOCK_DETECTOR = ex -> true;
 	private static final int DEFAULT_MAX_ATTEMPTS = 5;
 	private static final int DEFAULT_THREADS = 1;
