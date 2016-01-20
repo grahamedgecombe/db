@@ -1,0 +1,11 @@
+package com.google.common.util.concurrent;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
+
+class SettableFuture<V extends @Nullable Object> {
+  static <V extends @Nullable Object> SettableFuture<V> create();
+}
+
+class Uninterruptibles {
+  static <V extends @Nullable Object> void getUninterruptibly(Future<V> future);
+}
