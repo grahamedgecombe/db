@@ -92,6 +92,9 @@ Dependencies
  * Java 8 or above
  * [Google Guava][guava]
  * [SLF4J][slf4j]
+ * [The Checker Framework][checker] (for building only)
+ * [JUnit][junit] (for unit tests only)
+ * [HSQLDB][hsqldb] (for unit tests only)
 
 License
 -------
@@ -105,5 +108,8 @@ information and licensing terms.
 [isc]: http://opensource.org/licenses/isc-license.txt
 [guava]: https://github.com/google/guava
 [slf4j]: http://slf4j.org/
+[checker]: http://types.cs.washington.edu/checker-framework/
+[junit]: http://junit.org/
+[hsqldb]: http://hsqldb.org/
 [mysql-deadlock]: https://dev.mysql.com/doc/refman/5.7/en/innodb-deadlock-detection.html
 [pg-deadlock]: http://www.postgresql.org/docs/current/static/explicit-locking.html#LOCKING-DEADLOCKS
