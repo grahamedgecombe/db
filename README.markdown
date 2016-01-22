@@ -31,6 +31,8 @@ following dependency to your `pom.xml` file to use it:
       <version>1.0.0</version>
     </dependency>
 
+The artifacts are signed with my personal [GPG key][gpg].
+
 Usage
 -----
 
@@ -98,6 +100,7 @@ This project is available under the terms of the [ISC license][isc], which is
 similar to the 2-clause BSD license. See the `LICENSE` file for the copyright
 information and licensing terms.
 
+[gpg]: https://grahamedgecombe.com/gpe.asc
 [mvn]: https://maven.apache.org/
 [isc]: http://opensource.org/licenses/isc-license.txt
 [guava]: https://github.com/google/guava
