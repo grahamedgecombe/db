@@ -99,7 +99,7 @@ similar to the 2-clause BSD license. See the `LICENSE` file for the copyright
 information and licensing terms.
 
 [mvn]: https://maven.apache.org/
-[isc]: https://www.isc.org/downloads/software-support-policy/isc-license/
+[isc]: http://opensource.org/licenses/isc-license.txt
 [guava]: https://github.com/google/guava
 [slf4j]: http://slf4j.org/
 [mysql-deadlock]: https://dev.mysql.com/doc/refman/5.7/en/innodb-deadlock-detection.html
