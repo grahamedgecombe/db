@@ -6,12 +6,41 @@
         <maven>3.0</maven>
     </prerequisites>
 
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>9</version>
+    </parent>
+
     <groupId>com.grahamedgecombe.db</groupId>
     <artifactId>db</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Database API</name>
+    <description>A thin layer on top of the JDBC API that takes care of awkward boilerplate code.</description>
+    <url>https://grahamedgecombe.com/projects/db</url>
+
+    <licenses>
+        <license>
+            <name>ISC License</name>
+            <url>http://opensource.org/licenses/isc-license.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Graham Edgecombe</name>
+            <email>gpe@grahamedgecombe.com</email>
+            <url>https://grahamedgecombe.com</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/grahamedgecombe/db</connection>
+        <developerConnection>scm:git:git@github.com:grahamedgecombe/db.git</developerConnection>
+        <url>https://github.com/grahamedgecombe/db</url>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
