@@ -20,14 +20,13 @@ public final class DatabaseServiceTest {
 		JDBCDataSource ds = new JDBCDataSource();
 		ds.setURL("jdbc:hsqldb:mem:test");
 
-		service = DatabaseService.builder(ds).setBackoffStrategy(attempt -> 0).build();
-		service.startAsync().awaitRunning();
+		service = DatabaseService.builder(ds).setBackoffStrategy(attempt -> 0).build().start();
 	}
 
 	@After
 	public void tearDown() {
 		if (service != null) {
-			service.stopAsync().awaitTerminated();
+			service.stop();
 		}
 	}
 
