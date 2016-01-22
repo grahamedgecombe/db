@@ -55,6 +55,7 @@
             <groupId>org.checkerframework</groupId>
             <artifactId>checker</artifactId>
             <version>1.9.10</version>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.checkerframework</groupId>
