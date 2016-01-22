@@ -57,10 +57,9 @@ public final class DatabaseServiceTest {
 			throw new IllegalStateException();
 		}
 
-		service.<@Nullable Void>execute(connection -> {
+		service.executeVoid(connection -> {
 			try (PreparedStatement stmt = connection.prepareStatement("INVALID SYNTAX")) {
 				stmt.executeQuery();
-				return null;
 			}
 		});
 	}
