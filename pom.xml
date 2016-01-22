@@ -2,10 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <prerequisites>
-    <maven>3.0</maven>
-  </prerequisites>
-
   <parent>
     <groupId>org.sonatype.oss</groupId>
     <artifactId>oss-parent</artifactId>
@@ -20,7 +16,6 @@
   <name>Database API</name>
   <description>A thin layer on top of the JDBC API that takes care of awkward boilerplate code.</description>
   <url>https://grahamedgecombe.com/projects/db</url>
-
   <licenses>
     <license>
       <name>ISC License</name>
@@ -35,6 +30,10 @@
       <url>https://grahamedgecombe.com</url>
     </developer>
   </developers>
+
+  <prerequisites>
+    <maven>3.0</maven>
+  </prerequisites>
 
   <scm>
     <connection>scm:git:https://github.com/grahamedgecombe/db</connection>
