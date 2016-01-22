@@ -111,5 +111,5 @@ information and licensing terms.
 [checker]: http://types.cs.washington.edu/checker-framework/
 [junit]: http://junit.org/
 [hsqldb]: http://hsqldb.org/
-[mysql-deadlock]: https://dev.mysql.com/doc/refman/5.7/en/innodb-deadlock-detection.html
+[mysql-deadlock]: https://dev.mysql.com/doc/refman/5.7/en/innodb-deadlocks.html
 [pg-deadlock]: http://www.postgresql.org/docs/current/static/explicit-locking.html#LOCKING-DEADLOCKS
