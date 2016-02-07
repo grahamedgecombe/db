@@ -136,6 +136,7 @@
         <version>2.10.3</version>
         <configuration>
           <links>
+            <link>https://docs.oracle.com/javase/8/docs/api/</link>
             <link>https://google.github.io/guava/releases/19.0/api/docs/</link>
           </links>
         </configuration>
