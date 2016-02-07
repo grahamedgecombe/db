@@ -28,7 +28,7 @@ following dependency to your `pom.xml` file to use it:
     <dependency>
       <groupId>com.grahamedgecombe.db</groupId>
       <artifactId>db</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1</version>
     </dependency>
 
 The artifacts are signed with my personal [GPG key][gpg].
