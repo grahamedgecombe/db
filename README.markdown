@@ -71,20 +71,25 @@ Usage
             }
         }
     });
-    
+
     Futures.addCallback(future, new FutureCallback<String>() {
         @Override
         public void onSuccess(String result) {
             System.out.println(result); // prints "hello, world"
         }
-    
+
         @Override
         public void onFailure(Throwable ex) {
             ex.printStackTrace();
         }
     });
-    
+
     service.stop(); // any transactions submitted before stop() are executed before stop() returns
+
+Documentation
+-------------
+
+Javadocs are available on [javadoc.io][javadoc].
 
 Dependencies
 ------------
@@ -113,3 +118,4 @@ information and licensing terms.
 [hsqldb]: http://hsqldb.org/
 [mysql-deadlock]: https://dev.mysql.com/doc/refman/5.7/en/innodb-deadlocks.html
 [pg-deadlock]: http://www.postgresql.org/docs/current/static/explicit-locking.html#LOCKING-DEADLOCKS
+[javadoc]: https://www.javadoc.io/doc/com.grahamedgecombe.db/db/
