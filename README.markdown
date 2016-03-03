@@ -25,11 +25,13 @@ Installation
 This project is available in the [Maven][mvn] Central Repository. Add the
 following dependency to your `pom.xml` file to use it:
 
-    <dependency>
-      <groupId>com.grahamedgecombe.db</groupId>
-      <artifactId>db</artifactId>
-      <version>1.0.1</version>
-    </dependency>
+```xml
+<dependency>
+  <groupId>com.grahamedgecombe.db</groupId>
+  <artifactId>db</artifactId>
+  <version>1.0.1</version>
+</dependency>
+```
 
 The artifacts are signed with my personal [GPG key][gpg].
 
@@ -38,32 +40,12 @@ Usage
 
 ### Synchronous API
 
-    DataSource dataSource = ...;
-    DatabaseService service = DatabaseService.builder(dataSource).build().start();
-    
-    try {
-        String result = service.execute(connection -> {
-            try (PreparedStmt stmt = connection.prepareStatement("SELECT 'hello, world';")) {
-                try (ResultSet rs = stmt.executeQuery()) {
-                    rs.next();
-                    return rs.getString(1);
-                }
-            }
-        });
-    
-        System.out.println(result); // prints "hello, world"
-    } catch (ExecutionException ex) {
-        ex.printStackTrace();
-    }
-    
-    service.stop();
+```java
+DataSource dataSource = ...;
+DatabaseService service = DatabaseService.builder(dataSource).build().start();
 
-### Asynchronous API
-
-    DataSource dataSource = ...;
-    DatabaseService service = DatabaseService.builder(dataSource).build().start();
-    
-    ListenableFuture<String> future = service.executeAsync(connection -> {
+try {
+    String result = service.execute(connection -> {
         try (PreparedStmt stmt = connection.prepareStatement("SELECT 'hello, world';")) {
             try (ResultSet rs = stmt.executeQuery()) {
                 rs.next();
@@ -72,19 +54,43 @@ Usage
         }
     });
 
-    Futures.addCallback(future, new FutureCallback<String>() {
-        @Override
-        public void onSuccess(String result) {
-            System.out.println(result); // prints "hello, world"
-        }
+    System.out.println(result); // prints "hello, world"
+} catch (ExecutionException ex) {
+    ex.printStackTrace();
+}
 
-        @Override
-        public void onFailure(Throwable ex) {
-            ex.printStackTrace();
-        }
-    });
+service.stop();
+```
 
-    service.stop(); // any transactions submitted before stop() are executed before stop() returns
+### Asynchronous API
+
+```java
+DataSource dataSource = ...;
+DatabaseService service = DatabaseService.builder(dataSource).build().start();
+
+ListenableFuture<String> future = service.executeAsync(connection -> {
+    try (PreparedStmt stmt = connection.prepareStatement("SELECT 'hello, world';")) {
+        try (ResultSet rs = stmt.executeQuery()) {
+            rs.next();
+            return rs.getString(1);
+        }
+    }
+});
+
+Futures.addCallback(future, new FutureCallback<String>() {
+    @Override
+    public void onSuccess(String result) {
+        System.out.println(result); // prints "hello, world"
+    }
+
+    @Override
+    public void onFailure(Throwable ex) {
+        ex.printStackTrace();
+    }
+});
+
+service.stop(); // any transactions submitted before stop() are executed before stop() returns
+```
 
 Documentation
 -------------
