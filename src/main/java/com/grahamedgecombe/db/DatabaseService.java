@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadFactory;
 import javax.sql.DataSource;
 
 import com.google.common.base.Preconditions;
@@ -23,6 +24,7 @@ public final class DatabaseService extends AbstractService {
 	private static final DeadlockDetector DEFAULT_DEADLOCK_DETECTOR = ex -> true;
 	private static final int DEFAULT_MAX_ATTEMPTS = 5;
 	private static final int DEFAULT_THREADS = 1;
+	private static final ThreadFactory DEFAULT_THREAD_FACTORY = Thread::new;
 
 	/**
 	 * Creates a new {@link Builder} object.
@@ -42,6 +44,7 @@ public final class DatabaseService extends AbstractService {
 		private DeadlockDetector deadlockDetector = DEFAULT_DEADLOCK_DETECTOR;
 		private int maxAttempts = DEFAULT_MAX_ATTEMPTS;
 		private int threads = DEFAULT_THREADS;
+		private ThreadFactory threadFactory = DEFAULT_THREAD_FACTORY;
 
 		private Builder(DataSource dataSource) {
 			this.dataSource = dataSource;
@@ -110,11 +113,25 @@ public final class DatabaseService extends AbstractService {
 		}
 
 		/**
+		 * Sets the {@link ThreadFactory} used to create the transaction
+		 * executor threads.
+		 *
+		 * The default thread factory simply returns a new thread created using
+		 * the {@link Thread#Thread(Runnable)} constructor.
+		 * @param threadFactory The {@link ThreadFactory}.
+		 * @return This {@link Builder} object, for method chaining.
+		 */
+		public Builder setThreadFactory(ThreadFactory threadFactory) {
+			this.threadFactory = threadFactory;
+			return this;
+		}
+
+		/**
 		 * Builds a new {@link DatabaseService} object.
 		 * @return The {@link DatabaseService} object.
 		 */
 		public DatabaseService build() {
-			return new DatabaseService(dataSource, backoffStrategy, deadlockDetector, maxAttempts, threads);
+			return new DatabaseService(dataSource, backoffStrategy, deadlockDetector, maxAttempts, threads, threadFactory);
 		}
 	}
 
@@ -128,11 +145,11 @@ public final class DatabaseService extends AbstractService {
 		return executors;
 	}
 
-	private static Thread[] createThreads(TransactionExecutor[] executors) {
+	private static Thread[] createThreads(TransactionExecutor[] executors, ThreadFactory threadFactory) {
 		Thread[] threads = new Thread[executors.length];
 
 		for (int i = 0; i < threads.length; i++) {
-			threads[i] = new Thread(executors[i]);
+			threads[i] = threadFactory.newThread(executors[i]);
 		}
 
 		return threads;
@@ -144,9 +161,9 @@ public final class DatabaseService extends AbstractService {
 	private final Thread[] threads;
 	private @GuardedBy("lock") boolean running;
 
-	private DatabaseService(DataSource dataSource, BackoffStrategy backoffStrategy, DeadlockDetector deadlockDetector, int maxAttempts, int threads) {
+	private DatabaseService(DataSource dataSource, BackoffStrategy backoffStrategy, DeadlockDetector deadlockDetector, int maxAttempts, int threads, ThreadFactory threadFactory) {
 		this.executors = createExecutors(dataSource, backoffStrategy, deadlockDetector, maxAttempts, threads, jobs);
-		this.threads = createThreads(executors);
+		this.threads = createThreads(executors, threadFactory);
 	}
 
 	/**
