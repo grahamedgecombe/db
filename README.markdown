@@ -29,7 +29,7 @@ following dependency to your `pom.xml` file to use it:
 <dependency>
   <groupId>com.grahamedgecombe.db</groupId>
   <artifactId>db</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 </dependency>
 ```
 
